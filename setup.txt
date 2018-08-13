@@ -1,0 +1,12 @@
+Requirements
+
+tensorflow:
+pip install tensorflow
+
+timidity: to play midi files
+OSX: brew install timidity
+Ubuntu: I'm not sure actually
+
+magenta melody rnn:
+I'm making a repo for the project and it will come with this stuff preinstalled.
+Since we're gonna be modifying the architecture we're not going to path our python to magenta automatically.

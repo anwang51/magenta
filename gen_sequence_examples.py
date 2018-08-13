@@ -14,13 +14,11 @@ EVAL_RATIO = 0.1
 input_dir = sys.argv[1]
 output_dir = sys.argv[2]
 tmp_note_sequences = "tmp/note_sequences.tfrecord"
-os.system("INPUT_DIRECTORY=" + input_dir)
-os.system("OUTPUT_DIRECTORY=" + output_dir)
-os.system("EVAL_RATIO=" + EVAL_RATIO)
-os.system("$SEQUENCES_TFRECORD=" + tmp_note_sequences)
 
-note_sequences_cmd = "convert_dir_to_note_sequences --input_dir=$INPUT_DIRECTORY --output_file=$SEQUENCES_TFRECORD --recursive"
+note_sequences_cmd = "convert_dir_to_note_sequences --input_dir={0} --output_file={1} --recursive".format(input_dir, tmp_note_sequences)
 os.system(note_sequences_cmd)
 
-sequence_examples_cmd = "melody_rnn_create_dataset --config=lookback_rnn --input=$SEQUENCES_TFRECORD --output_dir=$OUTPUT_DIRECTORY --eval_ratio=$EVAL_RATIO"
-os.system(sequence_examples_cmd)s
+sequence_examples_cmd = "melody_rnn_create_dataset --config=lookback_rnn --input={0} --output_dir={1} --eval_ratio={2}".format(tmp_note_sequences, output_dir, EVAL_RATIO)
+os.system(sequence_examples_cmd)
+
+os.system("rm -rf tmp")
